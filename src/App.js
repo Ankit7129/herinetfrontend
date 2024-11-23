@@ -18,7 +18,7 @@ import ChatPage from './pages/ChatPage';
 
 const App = () => {
   return (
-    <Router>
+    <Router basename="/">
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/login" element={<LoginPage />} />
