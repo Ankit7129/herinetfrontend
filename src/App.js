@@ -8,6 +8,12 @@ import DashboardPage from "./pages/DashboardPage";
 import EditProfilePage from './pages/EditProfilePage';  // Assuming you have an EditProfilePage component
 import ProfilesPage from "./pages/ProfilesPage";
 import ConnexionListPage from "./pages/ConnexionListPage"; // Make sure this is the correct component name
+import CreateProjectPage from "./pages/CreateProjectPage";
+import SuggestedProjects from "./pages/SuggestedProjects";
+import JoinProject from "./pages/JoinProject";
+import GroupChatPage from "./pages/GroupChatPage";
+import MessageManagementPage from "./pages/MessageManagementPage";
+import ChatPage from './pages/ChatPage';
 
 
 const App = () => {
@@ -22,7 +28,15 @@ const App = () => {
         <Route path="/profiles" element={<ProfilesPage />} />
         <Route path="/edit-profile" element={<EditProfilePage />} />
         <Route path="/connexion" element={<ConnexionListPage />} /> {/* Updated to connexion */}
+        <Route path="/projects/create" element={<CreateProjectPage  />} />
+        <Route path="/projects/suggestions" element={<SuggestedProjects t/>} />
+        <Route path="/projects/join" element={<JoinProject  />} />      
+          <Route path="/group-chat/:projectId" element={<GroupChatPage />} />
+          <Route path="/chat/:userId" element={<ChatPage />} />
 
+        <Route path="/messages" element={<MessageManagementPage />} />
+
+  
 
 
       </Routes>

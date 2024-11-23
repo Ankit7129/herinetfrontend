@@ -130,6 +130,12 @@ const ConnexionListPage = () => {
       alert('Failed to remove connection');
     }
   };
+  // Send Message Handler
+const handleSendMessage = (userId) => {
+  // Navigate to the message page (you can use react-router-dom for navigation)
+  window.location.href = `/chat/${userId}`;
+};
+
 
   // Loading state
   if (loading) return <div>Loading...</div>;
@@ -163,6 +169,12 @@ const ConnexionListPage = () => {
               onClick={() => toggleFollow(profile.userId, 'unfollow')}
             >
               Unfollow
+            </button>
+            {/* Add the Send Message button */}
+            <button
+              onClick={() => handleSendMessage(profile.userId)}
+            >
+              Send Message
             </button>
           </div>
         )) : <p>No profiles available</p>}
