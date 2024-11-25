@@ -1,0 +1,262 @@
+/* General container styling */
+body {
+    margin: 0;
+    font-family: "Arial", sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Blue gradient background */
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Welcome and Login container */
+.welcome-container,
+.login-container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+}
+
+/* Header styling */
+.welcome-header h1,
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+/* Logo styling */
+.logo-container img {
+    width: 120px;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+}
+
+/* Carousel image styling */
+.carousel-container img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fade-in-out 10s infinite; /* Sync with JS */
+}
+
+/* Welcome message styling */
+.welcome-message {
+    margin: 20px 0;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #dce3f1; /* Change text color to a soft, pleasant light blue */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Optional: Add a subtle shadow for better visibility */
+    font-weight: 400;
+}
+
+/* Form container styling */
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    text-align: left;
+}
+
+/* Labels and inputs */
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+form input::placeholder {
+    color: #888;
+}
+
+/* Buttons */
+button,
+form button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(90deg, #4caf50, #2b8a3e);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover,
+form button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #66bb6a, #43a047);
+}
+
+button:disabled,
+form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Go back button */
+button:last-of-type {
+    background: linear-gradient(90deg, #1e88e5, #1565c0);
+}
+
+button:last-of-type:hover {
+    background: linear-gradient(90deg, #42a5f5, #1e88e5);
+}
+
+/* Error and motivational messages */
+p {
+    font-size: 0.9rem;
+    text-align: center;
+    font-style: italic;
+    color: #c8dd40;
+}
+
+.error {
+    color: #ff6b6b;
+}
+
+.success {
+    color: #00ff2a;
+}
+
+/* Loading bar animation */
+@keyframes progress {
+    0% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.loading-bar {
+    width: 100%;
+    height: 5px;
+    position: relative;
+    overflow: hidden;
+    background: #ccc;
+}
+
+.loading-bar div {
+    width: 100%;
+    height: 100%;
+    background: #4caf50;
+    animation: progress 1.5s infinite;
+}
+
+/* Fade-in-out for carousel images */
+@keyframes fade-in-out {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .welcome-container,
+    .login-container,
+    form {
+        width: 95%;
+        padding: 20px;
+    }
+
+    h2,
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    form label {
+        font-size: 14px;
+    }
+
+    form input,
+    form select {
+        font-size: 14px;
+    }
+
+    form button {
+        font-size: 16px;
+    }
+}
+/* General button styling */
+button {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #ffffff;
+    background: linear-gradient(90deg, #4caf50, #2b8a3e);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-align: center; /* Ensures consistent alignment */
+  }
+  
+  /* Specific button hover effect */
+  button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #66bb6a, #43a047);
+  }
+  
+  /* Disable state for buttons */
+  button:disabled {
+    background: #888;
+    cursor: not-allowed;
+  }
+  
+  /* Spacing for buttons in the login page */
+  .login-container button {
+    margin: 15px auto; /* Add vertical spacing between buttons */
+    display: block; /* Center-align buttons inside the container */
+    width: 90%; /* Make buttons consistent in width */
+    max-width: 300px; /* Prevent buttons from becoming too wide */
+    padding: 12px 0; /* Consistent padding for better clickability */
+  }
+  
+  /* Styling for the last button (e.g., Go back to Welcome) */
+  .login-container button:last-of-type {
+    background: linear-gradient(90deg, #1e88e5, #1565c0);
+  }
+  
+  .login-container button:last-of-type:hover {
+    background: linear-gradient(90deg, #42a5f5, #1e88e5);
+  }
+  

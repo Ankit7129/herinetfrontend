@@ -14,6 +14,7 @@ import JoinProject from "./pages/JoinProject";
 import GroupChatPage from "./pages/GroupChatPage";
 import MessageManagementPage from "./pages/MessageManagementPage";
 import ChatPage from './pages/ChatPage';
+import RoleSelectionPage from './pages/RoleSelectionPage';
 
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/chat/:userId" element={<ChatPage />} />
 
         <Route path="/messages" element={<MessageManagementPage />} />
+        <Route path="/select-role" element={<RoleSelectionPage />} /> {/* New Role Selection Page */}
 
   
 

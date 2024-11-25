@@ -41,19 +41,40 @@ const ProfilePage = () => {
     <div className="profile-container p-4">
       <h2>User Profile</h2>
       {profile ? (
-        <>
+        <div className="profile-boxes">
+          <div className="user-info-box">
+            <h3>User Information</h3>
+            <p><strong>Name:</strong> {profile.userId.name}</p>
+            <p><strong>Email:</strong> {profile.userId.email}</p>
+            <p><strong>Role:</strong> {profile.userId.role}</p>
+            <p><strong>College:</strong> {profile.userId.college}</p>
+          </div>
+
           <div className="profile-header">
             <img
               src={profile.profileImageUrl}
               alt="Profile"
               className="profile-image"
             />
-            <div className="profile-info">
-              <h3>{profile.userId.name}</h3>
-              <p><strong>Email:</strong> {profile.userId.email}</p>
-              <p><strong>College:</strong> {profile.userId.college}</p>
-              <p><strong>Bio:</strong> {profile.bio}</p>
-            </div>
+          </div>
+
+          <div className="bio-box">
+            <h3>Bio</h3>
+            <p>{profile.bio || "No bio available."}</p>
+          </div>
+
+          <div className="interests-box">
+            <h3>Interests</h3>
+            <p><strong>Predefined:</strong> {profile.interests.predefined.length > 0 ? profile.interests.predefined.join(", ") : "No predefined interests."}</p>
+            <p><strong>Custom:</strong> {profile.interests.custom.length > 0 ? profile.interests.custom.join(", ") : "No custom interests."}</p>
+          </div>
+
+          <div className="portfolio-box">
+            <h3>Portfolio Links</h3>
+            <p><strong>LinkedIn:</strong> {profile.portfolioLinks.linkedin || "Not provided"}</p>
+            <p><strong>GitHub:</strong> {profile.portfolioLinks.github || "Not provided"}</p>
+            <p><strong>Portfolio Website:</strong> {profile.portfolioLinks.portfolioWebsite || "Not provided"}</p>
+            <p><strong>Twitter:</strong> {profile.portfolioLinks.twitter || "Not provided"}</p>
           </div>
 
           <h4>Educational Background</h4>
@@ -94,28 +115,6 @@ const ProfilePage = () => {
             <p>No achievements listed.</p>
           )}
 
-          <h4>Hobbies</h4>
-          {profile.hobbies.length > 0 ? (
-            <ul>
-              {profile.hobbies.map((hobby) => (
-                <li key={hobby}>{hobby}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>No hobbies listed.</p>
-          )}
-
-          <h4>Certifications</h4>
-          {profile.certifications.length > 0 ? (
-            <ul>
-              {profile.certifications.map((certification) => (
-                <li key={certification}>{certification}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>No certifications listed.</p>
-          )}
-
           <h4>Skills</h4>
           <ul>
             {profile.skills.length > 0 ? (
@@ -124,60 +123,14 @@ const ProfilePage = () => {
               <p>No skills listed.</p>
             )}
           </ul>
-
-          <h4>Connections</h4>
-          {profile.connections.length > 0 ? (
-            <ul>
-              {profile.connections.map((connection) => (
-                <li key={connection}>{connection}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>No connections available.</p>
-          )}
-
-          <h4>Followers</h4>
-          {profile.followers.length > 0 ? (
-            <ul>
-              {profile.followers.map((follower) => (
-                <li key={follower}>{follower}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>No followers.</p>
-          )}
-
-          <h4>Following</h4>
-          {profile.following.length > 0 ? (
-            <ul>
-              {profile.following.map((following) => (
-                <li key={following}>{following}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>No following.</p>
-          )}
-
-          <h4>Connection Requests</h4>
-          {profile.connectionRequests.length > 0 ? (
-            <ul>
-              {profile.connectionRequests.map((request) => (
-                <li key={request._id}>
-                  User {request.userId} has a {request.status} request.
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No connection requests.</p>
-          )}
-
-          <button onClick={() => navigate("/edit-profile")} className="edit-profile-btn">
-            Edit Profile
-          </button>
-        </>
+        </div>
       ) : (
         <p>Profile data not available</p>
       )}
+
+      <button onClick={() => navigate("/edit-profile")} className="edit-profile-btn">
+        Edit Profile
+      </button>
     </div>
   );
 };

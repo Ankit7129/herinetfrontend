@@ -1,17 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import "./WelcomePage.css";
 
-const predefinedInterests = [
-  "Leadership", "Research", "Entrepreneurship",
-  "Programming", "AI", "Data Science", "Cybersecurity", "Robotics",
-  "Human Rights", "Corporate Law", "Criminal Justice",
-  "Marketing", "Finance", "Business Strategy",
-  "Public Health", "Medicine", "Biotech",
-  "UI/UX", "Graphic Design", "Architecture",
-  "Physics", "Chemistry", "Biology",
-  "Sports", "Music", "Arts", "Photography", "Writing",
-  "Traveling", "Volunteering", "Other"
-];
 
 const predefinedColleges = [
   "Heritage Law College",
@@ -23,214 +13,177 @@ const predefinedColleges = [
   "Other"
 ];
 
-const roles = ["Student", "Faculty", "Alumni", "Admin"];
-const genders = ["Male", "Female", "Other"];
-
 const RegisterPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    role: "Student",
-    college: "Heritage Law College",
-    gender: "Male",
-    predefinedInterests: [],
-    customInterest: "",
-    educationalBackground: [{ degree: "", fieldOfStudy: "", institutionName: "", graduationYear: "" }],
-    portfolioLinks: { linkedin: "", github: "", portfolioWebsite: "", twitter: "" },
-    password: "",
-    confirmPassword: ""
-  });
   const navigate = useNavigate();
+  const location = useLocation();
+  const { role } = location.state || {}; // Get role from the navigation state
 
-  const handleAddEducation = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    college: '',
+    gender: '',
+    role: role || '', // Pre-fill role if passed
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  // Handle form input changes
+  const handleChange = (e) => {
     setFormData({
       ...formData,
-      educationalBackground: [...formData.educationalBackground, { degree: "", fieldOfStudy: "", institutionName: "", graduationYear: "" }]
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleEducationChange = (index, field, value) => {
-    const updatedEducation = [...formData.educationalBackground];
-    updatedEducation[index][field] = value;
-    setFormData({ ...formData, educationalBackground: updatedEducation });
-  };
-
-  const handleRegister = async (e) => {
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      return alert("Passwords do not match!");
-    }
+    setLoading(true);
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      const formDataToSend = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        college: formData.college,
+        gender: formData.gender,
+        role: formData.role,
+      };
+
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formDataToSend),
       });
+
       const data = await response.json();
+
       if (response.ok) {
-        alert("Registration successful! Please verify your email.");
-        navigate("/login");
+        alert('Registration successful! Please verify your email.');
+        navigate('/login');
       } else {
-        alert(data.message || "Registration failed!");
+        alert(data.message || 'Registration failed!');
       }
     } catch (error) {
-      console.error("Error registering:", error);
+      console.error('Error registering:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Function to render motivational tags based on role
+  const getMotivationalMessage = (role) => {
+    switch (role) {
+      case 'Student':
+        return (
+          <p>
+            Hello, Student! Prepare to unlock endless opportunities and connect with inspiring individuals. Let's make your journey unforgettable in the smart club!
+          </p>
+        );
+      case 'Faculty':
+        return (
+          <p>
+            Hello, Faculty! Help us grow with your knowledge, experience, and guidance. Together, we can build a smarter and more impactful community!
+          </p>
+        );
+      case 'Alumni':
+        return (
+          <p>
+            Hello, Alumni! Your wisdom and suggestions are priceless. Guide the next generation, inspire them, and help us evolve into the smartest club ever!
+          </p>
+        );
+      default:
+        return <p>Please choose your role to get started.</p>;
     }
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
+    <div>
       <h2>Register</h2>
-      <form onSubmit={handleRegister} style={{ display: "inline-block", textAlign: "left" }}>
-        <label>Name:</label>
-        <input
-          type="text"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          required
-        />
-        <br />
-        
-        <label>Email:</label>
-        <input
-          type="email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          required
-        />
-        <br />
-        
-        <label>Role:</label>
-        <select value={formData.role} onChange={(e) => setFormData({ ...formData, role: e.target.value })}>
-          {roles.map((role) => (
-            <option key={role} value={role}>
-              {role}
-            </option>
-          ))}
-        </select>
-        <br />
-        
-        <label>College:</label>
-        <select value={formData.college} onChange={(e) => setFormData({ ...formData, college: e.target.value })}>
-          {predefinedColleges.map((college) => (
-            <option key={college} value={college}>
-              {college}
-            </option>
-          ))}
-        </select>
-        <br />
-        
-        <label>Gender:</label>
-        <select value={formData.gender} onChange={(e) => setFormData({ ...formData, gender: e.target.value })}>
-          {genders.map((gender) => (
-            <option key={gender} value={gender}>
-              {gender}
-            </option>
-          ))}
-        </select>
-        <br />
-        
-        <label>Interests:</label>
-<div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: "10px" }}>
-  {predefinedInterests.map((interest) => (
-    <label key={interest} style={{ display: "flex", alignItems: "center" }}>
-      <input
-        type="checkbox"
-        value={interest}
-        checked={formData.predefinedInterests.includes(interest)}
-        onChange={(e) => {
-          const updatedInterests = e.target.checked
-            ? [...formData.predefinedInterests, interest]
-            : formData.predefinedInterests.filter((i) => i !== interest);
-          setFormData({ ...formData, predefinedInterests: updatedInterests });
-        }}
-      />
-      <span style={{ marginLeft: "8px" }}>{interest}</span>
-    </label>
-  ))}
-</div>
-
-        <input
-          type="text"
-          placeholder="Custom Interest"
-          value={formData.customInterest}
-          onChange={(e) => setFormData({ ...formData, customInterest: e.target.value })}
-        />
-        <br />
-        
-        <label>Educational Background:</label>
-        {formData.educationalBackground.map((edu, index) => (
-          <div key={index}>
-            <input
-              type="text"
-              placeholder="Degree"
-              value={edu.degree}
-              onChange={(e) => handleEducationChange(index, "degree", e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Field of Study"
-              value={edu.fieldOfStudy}
-              onChange={(e) => handleEducationChange(index, "fieldOfStudy", e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Institution Name"
-              value={edu.institutionName}
-              onChange={(e) => handleEducationChange(index, "institutionName", e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder="Graduation Year"
-              value={edu.graduationYear}
-              onChange={(e) => handleEducationChange(index, "graduationYear", e.target.value)}
-            />
-          </div>
-        ))}
-        <button type="button" onClick={handleAddEducation}>
-          Add More Education
-        </button>
-        <br />
-        
-        <label>Portfolio Links:</label>
-        <input
-          type="text"
-          placeholder="LinkedIn"
-          value={formData.portfolioLinks.linkedin}
-          onChange={(e) =>
-            setFormData({ ...formData, portfolioLinks: { ...formData.portfolioLinks, linkedin: e.target.value } })
-          }
-        />
-        <input
-          type="text"
-          placeholder="GitHub"
-          value={formData.portfolioLinks.github}
-          onChange={(e) =>
-            setFormData({ ...formData, portfolioLinks: { ...formData.portfolioLinks, github: e.target.value } })
-          }
-        />
-        <br />
-        
-        <label>Password:</label>
-        <input
-          type="password"
-          value={formData.password}
-          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-          required
-        />
-        <br />
-        
-        <label>Confirm Password:</label>
-        <input
-          type="password"
-          value={formData.confirmPassword}
-          onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-          required
-        />
-        <br />
-        
-        <button type="submit">Register</button>
+      {role && getMotivationalMessage(role)} {/* Display role-specific message */}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="college">College</label>
+          <select
+            id="college"
+            name="college"
+            value={formData.college}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select College</option>
+            {predefinedColleges.map((college, index) => (
+              <option key={index} value={college}>
+                {college}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="gender">Gender</label>
+          <select
+            id="gender"
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="role">Role</label>
+          <input
+            type="text"
+            id="role"
+            name="role"
+            value={formData.role}
+            disabled
+          />
+        </div>
+        <div>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Registering...' : 'Register'}
+          </button>
+        </div>
       </form>
     </div>
   );

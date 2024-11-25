@@ -115,3 +115,40 @@ body {
   position: absolute;
   animation: progress 1.5s infinite;
 }
+.role-selection-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.role-selection-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.role-options {
+  display: flex;
+  gap: 20px;
+}
+
+.role-button {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #4caf50;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.role-button:hover {
+  background-color: #45a049;
+}

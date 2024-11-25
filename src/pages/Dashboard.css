@@ -1,115 +1,91 @@
-/* Dashboard.css */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-  }
-  
-  h1 {
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 10px;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .container {
-    text-align: center;
-    margin-top: 100px;
-  }
-  /* Dashboard.css */
+/* Main container for the dashboard */
 .dashboard-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-.header {
+  max-width: 1200px;
+  margin: 50px auto;
   text-align: center;
-  margin-bottom: 20px;
-}
-
-.profile-info {
-  margin-bottom: 30px;
-  background-color: #f8f9fa;
   padding: 20px;
+  background-color: #f9f9f9;
   border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.profile-info h3,
-.profile-info ul {
-  margin-top: 10px;
+/* Card styles */
+.card {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.dashboard-actions {
+/* Card headers */
+.card h5 {
+  color: #0073e6;
+  font-weight: bold;
+}
+
+/* Button container styling */
+.button-container {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-bottom: 30px;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-.dashboard-actions button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-.dashboard-actions button:hover {
-  background-color: #0056b3;
-}
-
-.projects-list {
-  margin-bottom: 30px;
-}
-
-.project-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.project-card {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
+/* Standard buttons */
+.btn {
   width: 250px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.project-card h4 {
-  margin-bottom: 10px;
-}
-
-.group-messages {
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.message-card {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
   padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  font-size: 16px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-  
+.btn:hover {
+  transform: translateY(-4px);
+  background-color: #005bb5;
+}
+
+/* Special button styling */
+.btn-special {
+  background-color: #ff5722;
+  color: white;
+  width: 250px;
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-special:hover {
+  transform: translateY(-4px);
+  background-color: #e64a19;
+}
+
+/* Error message styling */
+.error-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.error-container h2 {
+  font-size: 32px;
+  color: #f44336;
+}
+
+.error-container p {
+  font-size: 18px;
+  color: #757575;
+}
+
+/* Typography styles for better readability */
+h4, h5, h6, p {
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  color: #333;
+}
+
+ul {
+  text-align: left;
+  padding-left: 20px;
+}
