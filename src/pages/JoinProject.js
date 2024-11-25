@@ -10,7 +10,7 @@ const JoinProject = ({ token }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `/api/projects/join/${projectId}`,
+        `${process.env.REACT_APP_API_URL}/api/projects/join/${projectId}`,
         { role },
         { headers: { Authorization: `Bearer ${token}` } }
       );

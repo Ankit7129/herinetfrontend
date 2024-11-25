@@ -7,7 +7,7 @@ const SuggestedProjects = ({ token }) => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get("/api/projects/suggestions", {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/projects/suggestions`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProjects(response.data);

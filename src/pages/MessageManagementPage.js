@@ -10,14 +10,14 @@ const MessageManagementPage = () => {
 
   useEffect(() => {
     // Fetch user's projects
-    fetch("/api/projects/user-projects")
+    fetch(`${process.env.REACT_APP_API_URL}/api/projects/user-projects`)
       .then((res) => res.json())
       .then((data) => setProjects(data))
       .catch((err) => console.error(err));
   }, []);
 
   const fetchMessages = (projectId) => {
-    fetch(`/api/projects/messages/${projectId}`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/projects/messages/${projectId}`)
       .then((res) => res.json())
       .then((data) => {
         setMessages(data.messages);
@@ -27,7 +27,7 @@ const MessageManagementPage = () => {
   };
 
   const sendMessage = () => {
-    fetch(`/api/projects/message/${selectedProjectId}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/projects/message/${selectedProjectId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -16,7 +16,7 @@ const GroupChatPage = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .get(`/api/projects/${projectId}/messages`, {
+      .get(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}/messages`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -36,7 +36,7 @@ const GroupChatPage = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000//api/projects/messages/${projectId}`,
+        `${process.env.REACT_APP_API_URL}/api/projects/messages/${projectId}`,
         { content: newMessage },
         {
           headers: {

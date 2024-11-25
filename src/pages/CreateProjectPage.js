@@ -19,7 +19,7 @@ const CreateProject = ({ token }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "/api/projects/create",
+        `${process.env.REACT_APP_API_URL}/api/api/projects/create`,
         { ...formData, tags: formData.tags.split(",") },
         { headers: { Authorization: `Bearer ${token}` } }
       );
