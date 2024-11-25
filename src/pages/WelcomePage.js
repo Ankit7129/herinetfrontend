@@ -12,7 +12,7 @@ const WelcomePage = () => {
     // Fetch the logo and carousel images from the backend
     const fetchImages = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/manage-welcome-page/images");
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/manage-welcome-page/images`);
         const data = await response.json();
         
         setLogo(data.logo);
