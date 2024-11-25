@@ -34,6 +34,17 @@ const DashboardPage = () => {
 
   return (
     <div className="dashboard-container">
+      {/* Top-right Button for Post Management */}
+      <div className="top-right">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => navigate("/post-management")}
+        >
+          Manage Posts
+        </Button>
+      </div>
+
       {/* User Details Section */}
       <Card className="card">
         <CardContent>
@@ -96,6 +107,16 @@ const DashboardPage = () => {
         <Button variant="outlined" className="btn" onClick={() => navigate("/projects/suggestions")}>Suggested Projects</Button>
         <Button variant="outlined" className="btn" onClick={() => navigate("/projects/join")}>Join a Project</Button>
         <Button variant="outlined" className="btn" onClick={() => navigate("/messages")}>Manage Messages</Button>
+        <div className="button-container">
+        <Button
+          variant="contained"
+          color="primary"
+          className="btn"
+          onClick={() => navigate("/post-feed", { state: userDetails })}
+        >
+          Post Feed
+        </Button>
+      </div>
         <Button variant="contained" color="secondary" className="btn-special" onClick={() => alert("Special feature coming soon!")}>Special Feature</Button>
       </div>
     </div>

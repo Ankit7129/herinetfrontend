@@ -1,0 +1,201 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #e3f2fd, #f1f8e9);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Container */
+  #post-management-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+  }
+  
+  /* Title */
+  h1 {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Post Form */
+  #post-form {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #post-form textarea,
+  #post-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  #post-form button {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  #post-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Post List */
+  .post {
+    background: #ffffff;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .post h3 {
+    color: #1e88e5;
+    margin: 0 0 10px;
+  }
+  
+  .post p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+  
+  .post small {
+    display: block;
+    margin-top: 10px;
+    color: #888;
+  }
+  
+  /* Post Buttons */
+  .post-buttons {
+    margin-top: 15px;
+  }
+  
+  .post-buttons button {
+    background: linear-gradient(135deg, #66bb6a, #43a047);
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  
+  .post-buttons button:hover {
+    background: linear-gradient(135deg, #43a047, #2e7d32);
+    transform: scale(1.05);
+  }
+  
+  .post-buttons button.delete {
+    background: linear-gradient(135deg, #ef5350, #e53935);
+  }
+  
+  .post-buttons button.delete:hover {
+    background: linear-gradient(135deg, #e53935, #c62828);
+  }
+  
+  /* Comments Section */
+  .comments {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f7f7f7;
+    border-radius: 8px;
+  }
+  
+  .comments h4 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .comments p {
+    background: #e3f2fd;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .comments input {
+    width: calc(100% - 100px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+  
+  .comments button {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  
+  .comments button:hover {
+    background: linear-gradient(135deg, #1e88e5, #1565c0);
+    transform: scale(1.05);
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    #post-management-container {
+      width: 95%;
+    }
+  
+    #post-form textarea {
+      height: 100px;
+    }
+  
+    .post-buttons button {
+      margin-bottom: 10px;
+      display: block;
+      width: 100%;
+    }
+  
+    .comments input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+    .comments button {
+      width: 100%;
+    }
+  }
+  
