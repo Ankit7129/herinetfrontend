@@ -20,7 +20,36 @@ import PostManagement from "./pages/PostManagement";
 
 
 import PostFeedPage from "./pages/PostFeedPage";
-import CreatePostPage from "./pages/CreatePostPage"; 
+import CreatePostPage from "./pages/CreatePostPage";
+import CreateProjectPage from "./pages/CreateProjectPage"; // Import the new component
+
+
+import io from 'socket.io-client';
+
+// Connect to the Socket.io server
+const socket = io('http://localhost:3000'); // Replace with your server URL
+
+// Join a specific project room (based on project ID)
+const projectId = '12345'; // Example project ID
+socket.emit('join_room', projectId);
+
+// Listen for incoming messages in the project room
+socket.on('receive_message', (message) => {
+  console.log('New message:', message);
+  // Render the message in your chat UI
+});
+
+// Send a message to the server (when user sends a chat message)
+const sendMessage = (messageContent) => {
+  const messageData = {
+    projectId, // The ID of the project (chat room)
+    message: messageContent,
+    sender: 'User Name', // Replace with actual sender info
+    timestamp: new Date().toISOString(),
+  };
+  socket.emit('send_message', messageData);
+};
+
 
 const App = () => {
   const isAuthenticated = !!localStorage.getItem("token"); // Basic check for authentication
@@ -48,6 +77,8 @@ const App = () => {
             <Route path="/select-role" element={<RoleSelectionPage />} />
             <Route path="/post-management" element={<PostManagement />} />
             <Route path="/create-post" element={<CreatePostPage />} />
+            <Route path="/create-project" element={<CreateProjectPage />} /> {/* New route */}
+
             <Route path="/post-feed" element={<PostFeedPage />} />
           </>
         ) : (

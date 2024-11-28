@@ -16,16 +16,19 @@ import {
 } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const CreatePostPage = () => {
+const CreateProjectPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const userDetails = location.state;
   const { token } = userDetails || {};
 
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
-  const [tags, setTags] = useState([]);
-  const [media, setMedia] = useState([]);
+  // Project-specific states
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [skillsRequired, setSkillsRequired] = useState([]);
+  const [estimatedDuration, setEstimatedDuration] = useState("");
+  const [teamSize, setTeamSize] = useState(1);
+  const [attachments, setAttachments] = useState([]);
   const [visibility, setVisibility] = useState("Public");
   const [roleFilters, setRoleFilters] = useState([]);
   const [institutionFilters, setInstitutionFilters] = useState([]);
@@ -40,30 +43,30 @@ const CreatePostPage = () => {
     "The Heritage College",
     "Other"
   ];
-  const categories = ["Announcement", "Discussion", "Idea", "Event", "Achievement", "Help Request"];
-  const availableTags = ["Leadership", "Research", "Programming", "Entrepreneurship", "Design", "Other"];
 
-  const handleMediaUpload = (event) => {
-    setMedia(event.target.files);
+  const handleAttachmentUpload = (event) => {
+    setAttachments(event.target.files);
   };
 
-  const handleCreatePost = async () => {
+  const handleCreateProject = async () => {
     setLoading(true);
 
     const formData = new FormData();
-    formData.append("content", content);
-    formData.append("category", category);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("skillsRequired", skillsRequired.join(","));
+    formData.append("estimatedDuration", estimatedDuration);
+    formData.append("teamSize", teamSize);
     formData.append("visibility", visibility);
-    formData.append("tags", JSON.stringify(tags));
     formData.append(
       "visibilityFilters",
       JSON.stringify({ role: roleFilters, institution: institutionFilters })
     );
-    Array.from(media).forEach((file) => formData.append("media", file));
+    Array.from(attachments).forEach((file) => formData.append("attachments", file));
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/posts/create-post`,
+        `${process.env.REACT_APP_API_URL}/project/post-project`,
         formData,
         {
           headers: {
@@ -72,11 +75,11 @@ const CreatePostPage = () => {
           }
         }
       );
-      alert("Post created successfully!");
+      alert("Project posted successfully!");
       navigate("/post-feed", { state: userDetails });
     } catch (error) {
-      console.error("Error creating post:", error.message);
-      alert("Failed to create post. Please try again.");
+      console.error("Error creating project post:", error.message);
+      alert("Failed to create project. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -85,47 +88,48 @@ const CreatePostPage = () => {
   return (
     <div style={{ padding: "20px" }}>
       <Typography variant="h4" gutterBottom>
-        Create New Post
+        Create New Project
       </Typography>
       <Card style={{ marginTop: "20px" }}>
         <CardContent>
           <TextField
-            label="Content"
+            label="Project Title"
+            fullWidth
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            margin="normal"
+          />
+          <TextField
+            label="Project Description"
             multiline
             rows={4}
             fullWidth
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             margin="normal"
           />
-
-          <FormControl fullWidth margin="normal">
-            <InputLabel>Category</InputLabel>
-            <Select value={category} onChange={(e) => setCategory(e.target.value)}>
-              {categories.map((cat) => (
-                <MenuItem key={cat} value={cat}>
-                  {cat}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
-          <FormControl fullWidth margin="normal">
-            <InputLabel>Tags</InputLabel>
-            <Select
-              multiple
-              value={tags}
-              onChange={(e) => setTags(e.target.value)}
-              renderValue={(selected) => selected.join(", ")}
-            >
-              {availableTags.map((tag) => (
-                <MenuItem key={tag} value={tag}>
-                  <Checkbox checked={tags.includes(tag)} />
-                  <ListItemText primary={tag} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <TextField
+            label="Skills Required (comma-separated)"
+            fullWidth
+            value={skillsRequired.join(",")}
+            onChange={(e) => setSkillsRequired(e.target.value.split(","))}
+            margin="normal"
+          />
+          <TextField
+            label="Estimated Duration"
+            fullWidth
+            value={estimatedDuration}
+            onChange={(e) => setEstimatedDuration(e.target.value)}
+            margin="normal"
+          />
+          <TextField
+            label="Team Size"
+            type="number"
+            fullWidth
+            value={teamSize}
+            onChange={(e) => setTeamSize(e.target.value)}
+            margin="normal"
+          />
 
           <FormControl fullWidth margin="normal">
             <InputLabel>Visibility</InputLabel>
@@ -179,7 +183,7 @@ const CreatePostPage = () => {
               type="file"
               multiple
               accept="image/*,video/*"
-              onChange={handleMediaUpload}
+              onChange={handleAttachmentUpload}
             />
           </div>
 
@@ -188,10 +192,11 @@ const CreatePostPage = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={handleCreatePost}
+            onClick={handleCreateProject}
             disabled={loading}
           >
-            {loading ? "Creating..." : "Create Post"}
+            {loading ? "Creating..." : "Create Project"
+            }
           </Button>
         </CardContent>
       </Card>
@@ -199,4 +204,4 @@ const CreatePostPage = () => {
   );
 };
 
-export default CreatePostPage;
+export default CreateProjectPage;
