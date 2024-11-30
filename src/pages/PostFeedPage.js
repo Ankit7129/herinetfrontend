@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-
+//import Button from '@material-ui/core/Button';  // If using Material-UI
+import { FaHeart, FaRegHeart, FaComment, FaShare, FaTrashAlt, FaBookmark, FaRegBookmark } from 'react-icons/fa'; // Import icons
+import { Button, Card, CardContent, Typography } from "@mui/material";
 import './PostFeedPage.css';
 
 const PostFeedPage = () => {
   const location = useLocation();
   const userDetails = location.state;
   const navigate = useNavigate(); // Initialize navigate
+  const { user, token } = userDetails || {};
+
 
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [comments, setComments] = useState({});
   const [shareLinks, setShareLinks] = useState({}); // New state to store share links
-
+  const [showModal, setShowModal] = useState(false); // Modal for profile image
+  const [fullImage, setFullImage] = useState(''); // Full image URL
+  const [requestError, setRequestError] = useState(null);
+  const [requestMessage, setRequestMessage] = useState('');
   // Fetch posts on component mount
   useEffect(() => {
     const fetchPosts = async () => {
@@ -120,7 +126,7 @@ const PostFeedPage = () => {
   const handleDeleteComment = async (postId, commentId) => {
     try {
       await axios.delete(
-        `http://localhost:5000/posts/comment/delete/${postId}/${commentId}`,
+        `${process.env.REACT_APP_API_URL}/posts/comment/delete/${postId}/${commentId}`,
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
       setPosts(posts.map(post => 
@@ -137,36 +143,138 @@ const PostFeedPage = () => {
     }
   };
   // Render media attachments
-  const renderAttachments = (attachments) =>
-    attachments && attachments.length > 0 ? (
-      <div className="attachments-container">
-        {attachments.map((item, index) => (
-          <div key={index} className="attachment-item">
-            {item.type === 'image' ? (
+ const renderAttachments = (attachments) =>
+  attachments && attachments.length > 0 ? (
+    <div className="attachments-container">
+      {attachments.map((item, index) => {
+        if (item.type === 'image') {
+          return (
+            <div key={index} className="attachment-item">
               <img src={item.url} alt={`Attachment ${index}`} className="project-attachment" />
-            ) : (
+            </div>
+          );
+        } else if (item.type === 'video') {
+          return (
+            <div key={index} className="attachment-item">
+              <video controls className="project-attachment">
+                <source src={item.url} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          );
+        } else {
+          return (
+            <div key={index} className="attachment-item">
               <p>Unsupported attachment type</p>
-            )}
-          </div>
-        ))}
-      </div>
-    ) : null;
+            </div>
+          );
+        }
+      })}
+    </div>
+  ) : null;
 
-  // Render project details
-  const renderProjectDetails = (projectDetails) =>
-    projectDetails && (
-      <div className="project-details">
-        <h4>Project Title: {projectDetails.title}</h4>
-        <p>{projectDetails.description}</p>
-        <p><strong>Skills Required:</strong> {projectDetails.skillsRequired.join(', ')}</p>
-        <p><strong>Estimated Duration:</strong> {projectDetails.estimatedDuration}</p>
-        <p><strong>Team Size:</strong> {projectDetails.teamSize}</p>
-        {renderAttachments(projectDetails.attachments)}
+
+
+     // Show profile image modal
+  const handleProfileImageClick = (imageUrl) => {
+    setFullImage(imageUrl);
+    setShowModal(true);
+  };
+
+  // Hide profile image modal
+  const closeModal = () => {
+    setShowModal(false);
+    setFullImage('');
+  };
+
+  // Navigate to author's profile
+  const handleAuthorClick = (authorId) => {
+    navigate(`/profile/${authorId}`);
+  };
+
+  const handleJoinRequest = async (postId) => {
+    try {
+      // Make the POST request to join the project (using postId as projectId)
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/project/request-to-join/${postId}`,  // postId is used here as projectId
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,  // Include the token in the request header
+          },
+        }
+      );
+  
+      // Log the response message and optionally update state
+      console.log(response.data.message);  // Log the message from the backend
+  
+      // Optionally, set the message in state for showing to the user
+      setRequestMessage(response.data.message);  // Store message in state for success message display
+      alert(response.data.message);  // Show success message in alert (or you can use a UI component for messages)
+      
+    } catch (error) {
+      // Handle errors and show the error message
+      console.error(error);
+  
+      // Set error message if available from the backend, or default to a general error message
+      setRequestError(error.response?.data?.message || 'An error occurred while joining the project.');
+      
+      // Optionally, show an error message in an alert
+      alert(error.response?.data?.message || 'An error occurred while joining the project.');
+    }
+  };
+  
+  
+  
+
+  
+
+
+    // Render project details
+    const renderProjectDetails = (projectDetails, postId) => {
+      return (
+        projectDetails && (
+          <div className="project-details">
+            <h4>Project Title: {projectDetails.title}</h4>
+            <p>{projectDetails.description}</p>
+            <p><strong>Skills Required:</strong> {projectDetails.skillsRequired.join(', ')}</p>
+            <p><strong>Estimated Duration:</strong> {projectDetails.estimatedDuration}</p>
+            <p><strong>Team Size:</strong> {projectDetails.teamSize}</p>
+            {renderAttachments(projectDetails.attachments)}
+    
+            {/* Add the Request to Join Button */}
+            <button onClick={() => handleJoinRequest(postId)}>Request to Join</button>
+          </div>
+        )
+      );
+    };
+    
+
+    // Ensure that user details and token are present
+  if (!userDetails || !token) {
+    return (
+      <div className="error-container">
+        <h2>Error</h2>
+        <p>User details or session expired. Please login again.</p>
+        <Button variant="contained" onClick={() => navigate("/login")}>Go to Login</Button>
       </div>
     );
+  }
 
     return (
       <div className="post-feed-container">
+
+         {/* User Details Section */}
+      <Card className="card">
+        <CardContent>
+          <Typography variant="h4" gutterBottom>Welcome, {user.name}!</Typography>
+          <Typography variant="h6" color="textSecondary"><strong>User ID:</strong> {user.id}</Typography>
+          <Typography variant="h6" color="textSecondary"><strong>Email:</strong> {user.email}</Typography>
+          <Typography variant="h6" color="textSecondary"><strong>Role:</strong> {user.role}</Typography>
+          <Typography variant="h6" color="textSecondary"><strong>College:</strong> {user.college}</Typography>
+          <Typography variant="h6" color="textSecondary"><strong>Gender:</strong> {user.gender}</Typography>
+        </CardContent>
+      </Card>
         {/* Create Post and Create Project Buttons */}
         <div className="create-post-button-container" style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
           <button 
@@ -183,6 +291,14 @@ const PostFeedPage = () => {
           >
             Create Project
           </button>
+          {/* New View Profiles Button */}
+        <button 
+          variant="outlined" 
+          className="btn" 
+          onClick={() => navigate("/profiles")}
+        >
+          View Profiles
+        </button>
         </div>
       {loading ? (
         <div className="loading">Loading...</div>
@@ -192,17 +308,33 @@ const PostFeedPage = () => {
         posts.map((post) => (
         
           <div key={post._id} className="post-card">
+            
             {/* Post Header */}
             <div className="post-header">
-              <h3>{post.author.name}</h3>
+              <img src={post.author.profile.profileImageUrl} alt="Profile" className="profile-pic" 
+              onClick={() => handleProfileImageClick(post.author.profile.profileImageUrl)}
+              />
+              <div className="header-details">
+              <h3 onClick={() => handleAuthorClick(post.author._id)}>{post.author.name}</h3>
               <p>{post.author.college} - {post.author.role}</p>
-              <p>{new Date(post.createdAt).toLocaleDateString()}</p>
+                <p className="post-date">{new Date(post.createdAt).toLocaleDateString()}</p>
+                <p className="post-id">Post ID: {post._id}</p> {/* Add this line */}
+
+              </div>
+               {/* Modal for full profile image */}
+      <div className={`modal ${showModal ? 'show' : ''}`}>
+        <div className="modal-content">
+          <button className="close-button" onClick={closeModal}>X</button>
+          <img src={fullImage} alt="Full profile" className="full-profile-image" />
+        </div>
+      </div>
             </div>
+
 
             {/* Post Content */}
             <div className="post-content">
               <p>{post.content}</p>
-              {renderProjectDetails(post.projectDetails)}
+              {renderProjectDetails(post.projectDetails , post._id)}
             </div>
 
             {/* Engagement Stats */}
@@ -213,14 +345,24 @@ const PostFeedPage = () => {
             {/* Post Actions */}
             <div className="post-actions">
               <button onClick={() => handleToggleAction('like', post._id)}>
-                {post.likedByCurrentUser ? 'Unlike' : 'Like'}
+                {post.likedByCurrentUser ? <FaHeart color="red" /> : <FaRegHeart />}
+              </button>
+              <button onClick={() => handleCommentSubmit(post._id)}>
+                <FaComment />
+              </button>
+              <button onClick={() => handleToggleAction('share', post._id)}>
+                <FaShare />
               </button>
               <button onClick={() => handleToggleAction('save', post._id)}>
-                {post.savedByCurrentUser ? 'Unsave' : 'Save'}
+                {post.savedByCurrentUser ? <FaBookmark /> : <FaRegBookmark />}
               </button>
-              <button onClick={() => handleToggleAction('share', post._id)}>Share</button>
-              <button onClick={() => handleDeletePost(post._id)}>Delete Post</button>
+              {user.id === post.author._id && (
+                <button onClick={() => handleDeletePost(post._id)}>
+                  <FaTrashAlt />
+                </button>
+              )}
             </div>
+
 
             {/* Display share link if available */}
             {shareLinks[post._id] && (
@@ -258,6 +400,16 @@ const PostFeedPage = () => {
       ) : (
         <div>No posts available.</div>
       )}
+      {/* Profile Image Modal */}
+      {showModal && (
+        <div className="modal" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <img src={fullImage} alt="Full Profile" className="full-profile-image" />
+            <button onClick={closeModal} className="close-button">Close</button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

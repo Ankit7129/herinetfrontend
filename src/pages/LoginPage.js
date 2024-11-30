@@ -23,7 +23,7 @@ const LoginPage = () => {
       setLoading(false); // Stop loading
       if (response.ok) {
         localStorage.setItem("token", data.token); // Save token
-        navigate("/dashboard", { state: data }); // Pass data to dashboard
+        navigate("/post-feed", { state: data }); // Pass data to dashboard
       } else {
         setError(data.msg || "Login failed!"); // Show error message
       }

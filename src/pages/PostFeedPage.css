@@ -1,278 +1,313 @@
-/* PostFeedPage.css */
+/* General container styling */
 .post-feed-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+  border-radius: 12px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual post card */
+.post-card {
+  background-color: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 550px;
+  margin-bottom: 25px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.post-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Header styling */
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 15px;
+  background-color: #f7f7f7;
+  border-bottom: 2px solid #e0e0e0;
+  transition: background-color 0.3s ease;
+}
+
+.post-header:hover {
+  background-color: #e6f7ff;
+}
+
+.profile-pic {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  transition: border-color 0.3s ease;
+}
+
+.profile-pic:hover {
+  border-color: #007bff;
+}
+
+.header-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.header-details h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.header-details p {
+  margin: 4px 0;
+  color: #666;
+  font-size: 1em;
+}
+
+.post-date {
+  font-size: 0.85em;
+  color: #999;
+}
+
+/* Emojis styling for better alignment */
+.header-details span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1em;
+}
+
+/* Content styling */
+.post-content {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 13px;
+  color: #444;
+  line-height: .8;
+}
+
+/* Project details */
+.project-details {
+  background-color: #f0f8ff;
+  padding: 6px;
+  border-left: 3px solid #007bff;
+  border-radius: 25px;
+  margin-top: 1px;
+  width: 100%;
+}
+
+.project-details h4 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #007bff;
+}
+
+.project-details p {
+  margin: 6px 0;
+  color: #555;
+  font-size: 1em;
+}
+
+/* Attachments */
+.attachments-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  margin-top: 1px;
+}
+
+.attachment-item img,
+.attachment-item video {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.attachment-item img:hover,
+.attachment-item video:hover {
+  transform: scale(1.00);
+}
+
+/* Post actions */
+.post-actions {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.post-actions button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.post-actions button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Comments section */
+.comments-section {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.comments-section textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  resize: none;
+  transition: border-color 0.3s ease;
+}
+
+.comments-section textarea:focus {
+  border-color: #007bff;
+}
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 15px;
+  margin-top: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading and error states */
+.loading,
+.error {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #ff6347;
+  font-weight: bold;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Loading animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .post-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+  to {
+    opacity: 1;
   }
-  
-  .post-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-  }
-  
-  .author-info {
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  .post-date {
-    font-size: 0.875rem;
-    color: #777;
-  }
-  
-  .post-content {
-    font-size: 1rem;
-    margin-bottom: 15px;
-    color: #333;
-  }
-  
-  .project-details {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 15px;
-  }
-  
-  .project-details h4 {
-    font-size: 1.25rem;
-    color: #333;
-  }
-  
-  .project-details p {
-    font-size: 1rem;
-    color: #666;
-  }
-  
-  .post-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .action-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .action-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .join-request-btn {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .join-request-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .join-request-btn:hover {
-    background-color: #218838;
-  }
-  
-  .loading, .error {
-    text-align: center;
-    font-size: 1.25rem;
-    color: #ff6347;
-  }
-  /* PostFeedPage.css */
-.attachments {
-    margin-top: 20px;
-  }
-  
-  .attachment-item {
-    margin-bottom: 15px;
-  }
-  
-  .attachment-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
-  .attachment-item video {
-    max-width: 100%;
-    border-radius: 5px;
-  }
-  
-  a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .post-feed-container {
-    width: 80%;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .loading,
-  .error {
-    text-align: center;
-    font-size: 18px;
-    color: #333;
-  }
-  
-  .post-card {
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .post-card:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  .post-header h3 {
-    margin: 0;
-    font-size: 20px;
-    color: #333;
-  }
-  
-  .post-header p {
-    margin: 5px 0;
-    color: #666;
-  }
-  
-  .post-content {
-    margin: 15px 0;
-    font-size: 16px;
-    color: #444;
-  }
-  
-  .project-details {
-    background-color: #f0f8ff;
     padding: 15px;
-    border-left: 5px solid #007bff;
-    border-radius: 5px;
-    margin-top: 10px;
   }
-  
-  .project-details h4 {
-    margin-top: 0;
-    font-size: 18px;
-    color: #007bff;
+
+  .post-card {
+    padding: 14px;
   }
-  
-  .project-details p {
-    margin: 5px 0;
-    color: #555;
+
+  .post-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .attachments-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
+
+  .profile-pic {
+    width: 50px;
+    height: 50px;
   }
-  
-  .project-attachment {
-    width: 100%;
-    max-width: 300px;
-    border-radius: 8px;
-    object-fit: cover;
+
+  .header-details h3 {
+    font-size: 1.1em;
   }
-  
-  .engagement-stats {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #777;
-  }
-  
+
   .post-actions {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
   }
-  
-  .post-actions button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .post-actions button:hover {
-    background-color: #0056b3;
-  }
-  
-  .comments-section {
-    margin-top: 15px;
-  }
-  
-  .comments-section textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: none;
-  }
-  
-  .comments-section button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    margin-top: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .comments-section button:hover {
-    background-color: #218838;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .post-feed-container {
-      width: 100%;
-      padding: 10px;
-    }
-  
-    .post-card {
-      padding: 10px;
-    }
-  
-    .project-attachment {
-      max-width: 100%;
-    }
-  }
-  
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  position: relative;
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 30%;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal-content.show {
+  transform: scale(1);
+}
+
+.full-profile-image {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+  background: #e60000;
+}

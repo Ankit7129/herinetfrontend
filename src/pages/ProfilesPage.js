@@ -1,138 +1,64 @@
-import React, { useEffect, useState } from 'react';
+// ProfilesPage.js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import "./ProfilePage.css";
+import './ProfilePage.css';
 
-const ProfilePage = () => {
-  const [profile, setProfile] = useState(null);
+const ProfilesPage = () => {
+  const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const [searchId, setSearchId] = useState('');
+  const navigate = useNavigate();  // Initialize navigation hook
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/profile/profiles`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch profile");
-        }
-
-        const data = await response.json();
-        setProfile(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProfile();
+    fetchProfiles();
   }, []);
 
+  const fetchProfiles = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/profile/profiles`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
+      setProfiles(response.data.profiles);
+    } catch (error) {
+      setError('Failed to fetch profiles.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleViewProfile = (userId) => {
+    console.log("Navigating to profile with ID:", userId); // Add this for debugging
+    navigate(`/profile/${userId}`);
+  };
+  
+
   if (loading) return <div>Loading...</div>;
-  if (error) return <div className="error-message">{error}</div>;
+  if (error) return <div className="error">{error}</div>;
 
   return (
-    <div className="profile-container p-4">
-      <h2>User Profile</h2>
-      {profile ? (
-        <div className="profile-boxes">
-          <div className="user-info-box">
-            <h3>User Information</h3>
-            <p><strong>Name:</strong> {profile.userId.name}</p>
-            <p><strong>Email:</strong> {profile.userId.email}</p>
-            <p><strong>Role:</strong> {profile.userId.role}</p>
-            <p><strong>College:</strong> {profile.userId.college}</p>
-          </div>
-
-          <div className="profile-header">
+    <div className="profiles-page">
+      <div className="profiles-list">
+        {profiles.map((profile) => (
+          <div key={profile._id} className="profile-card">
             <img
-              src={profile.profileImageUrl}
-              alt="Profile"
+              src={profile.profileImageUrl || 'default-profile.png'}
+              alt={profile.userId.name}
               className="profile-image"
             />
+            <h2>{profile.userId.name}</h2>
+            <p>{profile.bio || 'No bio available.'}</p>
+            <button onClick={() => handleViewProfile(profile.userId._id)}>
+              View Profile
+            </button>
           </div>
-
-          <div className="bio-box">
-            <h3>Bio</h3>
-            <p>{profile.bio || "No bio available."}</p>
-          </div>
-
-          <div className="interests-box">
-            <h3>Interests</h3>
-            <p><strong>Predefined:</strong> {profile.interests.predefined.length > 0 ? profile.interests.predefined.join(", ") : "No predefined interests."}</p>
-            <p><strong>Custom:</strong> {profile.interests.custom.length > 0 ? profile.interests.custom.join(", ") : "No custom interests."}</p>
-          </div>
-
-          <div className="portfolio-box">
-            <h3>Portfolio Links</h3>
-            <p><strong>LinkedIn:</strong> {profile.portfolioLinks.linkedin || "Not provided"}</p>
-            <p><strong>GitHub:</strong> {profile.portfolioLinks.github || "Not provided"}</p>
-            <p><strong>Portfolio Website:</strong> {profile.portfolioLinks.portfolioWebsite || "Not provided"}</p>
-            <p><strong>Twitter:</strong> {profile.portfolioLinks.twitter || "Not provided"}</p>
-          </div>
-
-          <h4>Educational Background</h4>
-          {profile.educationalBackground.length > 0 ? (
-            <ul>
-              {profile.educationalBackground.map((education) => (
-                <li key={education._id}>
-                  <strong>{education.degree}</strong> in {education.fieldOfStudy} from {education.institution} ({education.graduationYear})
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No educational background available.</p>
-          )}
-
-          <h4>Professional Experience</h4>
-          {profile.professionalExperience.length > 0 ? (
-            <ul>
-              {profile.professionalExperience.map((experience) => (
-                <li key={experience._id}>
-                  <strong>{experience.jobTitle}</strong> at {experience.company} ({experience.startYear} - {experience.endYear ? experience.endYear : "Present"})
-                  <p>{experience.description}</p>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No professional experience available.</p>
-          )}
-
-          <h4>Achievements</h4>
-          {profile.achievements.length > 0 ? (
-            <ul>
-              {profile.achievements.map((achievement) => (
-                <li key={achievement}>{achievement}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>No achievements listed.</p>
-          )}
-
-          <h4>Skills</h4>
-          <ul>
-            {profile.skills.length > 0 ? (
-              profile.skills.map((skill, index) => <li key={index}>{skill}</li>)
-            ) : (
-              <p>No skills listed.</p>
-            )}
-          </ul>
-        </div>
-      ) : (
-        <p>Profile data not available</p>
-      )}
-
-      <button onClick={() => navigate("/edit-profile")} className="edit-profile-btn">
-        Edit Profile
-      </button>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default ProfilePage;
+export default ProfilesPage;

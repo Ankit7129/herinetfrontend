@@ -18,6 +18,7 @@ import ChatPage from './pages/ChatPage';
 import RoleSelectionPage from './pages/RoleSelectionPage';
 import PostManagement from "./pages/PostManagement";
 
+import ProfileDetailPage from './pages/ProfileDetailPage';
 
 import PostFeedPage from "./pages/PostFeedPage";
 import CreatePostPage from "./pages/CreatePostPage";
@@ -67,6 +68,8 @@ const App = () => {
           <>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/profiles" element={<ProfilesPage />} />
+            <Route path="/profile/:userId" element={<ProfileDetailPage />} />
+
             <Route path="/edit-profile" element={<EditProfilePage />} />
             <Route path="/connexion" element={<ConnexionListPage />} />
             <Route path="/projects/suggestions" element={<SuggestedProjects />} />
