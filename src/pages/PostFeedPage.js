@@ -379,11 +379,11 @@ const PostFeedPage = () => {
                   <div key={comment._id} className="comment">
                      <p><strong>{comment.commenter.name}</strong>: {comment.content}</p>
           {/* Delete button visible only for comment author or post author */}
-          {(userDetails.id === comment.commenter._id || userDetails.id === post.author._id) && (
+         
             <button onClick={() => handleDeleteComment(post._id, comment._id)}>
               Delete
             </button>
-          )}
+          
                     </div>
                   ))}
                 </div>

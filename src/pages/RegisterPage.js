@@ -4,12 +4,12 @@ import "./WelcomePage.css";
 
 
 const predefinedColleges = [
+  "Heritage Institute of Technology",
+  "Heritage Business School",
+  "The Heritage Academy",
   "Heritage Law College",
-  "Heritage Technology College",
-  "Heritage Business Academy",
-  "Heritage Arts & Humanities College",
-  "Heritage Medical College",
-  "Heritage School of Architecture",
+  "The Heritage College",
+
   "Other"
 ];
 
