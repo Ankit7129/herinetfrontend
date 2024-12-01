@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 // Importing pages
+
 import WelcomePage from "./pages/WelcomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -18,7 +19,8 @@ import ChatPage from './pages/ChatPage';
 import RoleSelectionPage from './pages/RoleSelectionPage';
 
 import ProfileDetailPage from './pages/ProfileDetailPage';
-
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import PostFeedPage from "./pages/PostFeedPage";
 import CreatePostPage from "./pages/CreatePostPage";
 import CreateProjectPage from "./pages/CreateProjectPage"; // Import the new component

@@ -1,252 +1,174 @@
 /* General container styling */
 .post-feed-container {
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
   padding: 20px;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-  border-radius: 12px;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Individual post card */
-.post-card {
-  background-color: #fff;
-  border-radius: 18px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 550px;
-  margin-bottom: 15px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.post-card:hover {
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-  transform: translateY(-5px);
 }
 
 /* Header styling */
-.post-header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  width: 100%;
-  padding: 12px;
-  background-color: #f7f7f7;
-  border-bottom: 2px solid #e0e0e0;
-  transition: background-color 0.3s ease;
-}
-
-.post-header:hover {
-  background-color: #e6f7ff;
-}
-
-.profile-pic {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #ddd;
-  transition: border-color 0.3s ease;
-}
-
-.profile-pic:hover {
-  border-color: #007bff;
-}
-
-.header-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1;
-}
-
-.header-details h3 {
-  margin: 0;
-  color: #333;
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-.header-details p {
-  margin: 2px 0;
-  color: #666;
-  font-size: 0.9em;
-}
-
-.post-date {
-  font-size: 0.8em;
-  color: #999;
-}
-
-/* Emojis styling */
-.header-details span {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1em;
-}
-
-/* Content styling */
-.post-content {
+header {
+  background-color: #4caf50;
+  color: white;
   text-align: center;
-  margin: 15px 0;
-  font-size: 14px;
-  color: #444;
-  line-height: 1.2;
+  padding: 15px;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
 }
 
-/* Project details */
-.project-details {
-  background-color: #f0f8ff;
-  padding: 5px;
-  border-left: 3px solid #007bff;
-  border-radius: 20px;
-  margin-top: 5px;
-  width: 100%;
-}
-
-.project-details h4 {
-  margin-top: 0;
-  font-size: 18px;
-  color: #007bff;
-}
-
-.project-details p {
-  margin: 5px 0;
-  color: #555;
-  font-size: 0.95em;
-}
-
-/* Attachments */
-.attachments-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 10px;
-}
-
-.attachment-item img,
-.attachment-item video {
-  max-width: 100%;
-  max-height: 100%;
+/* User details card */
+.user-details-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  transition: transform 0.3s ease;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 
-.attachment-item img:hover,
-.attachment-item video:hover {
-  transform: scale(1.05);
+/* Buttons */
+button.create-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
 }
 
-/* Post actions */
-.post-actions {
+button.create-button:hover {
+  background-color: #45a049;
+}
+
+button.logout-button {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+button.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Post card */
+.post-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  transition: box-shadow 0.3s;
+}
+
+.post-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.post-card img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.post-card .post-actions {
   display: flex;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: space-between;
   margin-top: 15px;
 }
 
-.post-actions button {
-  background-color: #007bff;
-  color: white;
+.post-card .icon-button {
+  background: none;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 1.2rem;
+  color: #757575;
+  transition: color 0.3s;
 }
 
-.post-actions button:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
+.post-card .icon-button:hover {
+  color: #4caf50;
 }
 
 /* Comments section */
 .comments-section {
-  width: 100%;
+  background-color: #fafafa;
+  border-top: 1px solid #ddd;
   margin-top: 15px;
-}
-
-.comments-section textarea {
-  width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  resize: none;
-  transition: border-color 0.3s ease;
 }
 
-.comments-section textarea:focus {
-  border-color: #007bff;
-}
-
-.comment {
-  display: flex;
-  justify-content: space-between;
-  background-color: #f9f9f9;
+.comments-section input {
+  width: calc(100% - 50px);
   padding: 8px;
-  border-radius: 12px;
-  margin-top: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
-/* Loading and error states */
-.loading,
-.error {
+.comments-section button {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comments-section button:hover {
+  background-color: #45a049;
+}
+
+/* Modal styling */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.modal img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.modal .close-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 10px;
+  cursor: pointer;
+  float: right;
+}
+
+.modal .close-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Footer */
+footer {
+  background-color: #4caf50;
+  color: white;
   text-align: center;
-  font-size: 1.2rem;
-  color: #ff6347;
-  font-weight: bold;
-  animation: fadeIn 0.5s ease;
-}
-
-/* Loading animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .post-feed-container {
-    padding: 15px;
-  }
-
-  .post-card {
-    padding: 15px;
-  }
-
-  .post-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .profile-pic {
-    width: 50px;
-    height: 50px;
-  }
-
-  .header-details h3 {
-    font-size: 1.1em;
-  }
-
-  .post-actions {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
+  padding: 10px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.9rem;
 }

@@ -1,27 +1,16 @@
 import React, { useState } from "react";
 import { FaHeart, FaRegHeart, FaComment, FaShare, FaBookmark, FaRegBookmark, FaTrashAlt } from "react-icons/fa";
 import './PostCard.css';
-const PostCard = ({ post, user, handleImageClick, handleAuthorClick, handleToggleAction, handleCommentToggle, handleDeletePost, handleCommentSubmit, handleDeleteComment, visibleComments, comments, setComments, shareLinks,handleJoinRequest }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [fullImage, setFullImage] = useState("");
-  const [requestError, setRequestError] = useState("");
-  const [requestMessage, setRequestMessage] = useState("");
 
+const PostCard = ({ post, user, handleToggleAction, handleCommentToggle, handleDeletePost, handleCommentSubmit, handleDeleteComment, visibleComments, comments, setComments, shareLinks, handleJoinRequest, handleAuthorClick }) => {
+  // Handle the profile image modal (removed, not required anymore)
 
-  
-  // Handle the profile image modal
-  const handleImageClickModal = (imageUrl) => {
-    setFullImage(imageUrl);
-    setShowModal(true);
+  // Handle click on the author header area
+  const handleHeaderClick = () => {
+    handleAuthorClick(post.author._id);
   };
 
-
- 
-
-  // Handle close modal
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+  // Render attachments (images/videos)
   const renderAttachments = (attachments) =>
     attachments && attachments.length > 0 ? (
       <div className="attachments-container">
@@ -51,7 +40,7 @@ const PostCard = ({ post, user, handleImageClick, handleAuthorClick, handleToggl
         })}
       </div>
     ) : null;
-  
+
   // Render project details
   const renderProjectDetails = (projectDetails, postId) => {
     return (
@@ -73,62 +62,45 @@ const PostCard = ({ post, user, handleImageClick, handleAuthorClick, handleToggl
       )
     );
   };
-  
 
-  
   return (
     <div key={post._id} className="post-card">
       {/* Post Header */}
-      <div className="post-header">
+      <div className="post-header" onClick={handleHeaderClick}>
         <img
           src={post.author.profile.profileImageUrl}
           alt="Profile"
           className="profile-pic"
-          onClick={() => handleImageClickModal(post.author.profile.profileImageUrl)}
         />
-        {/* Modal for Full Image */}
-        {showModal && (
-          <div className="modal" onClick={handleCloseModal}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <img src={fullImage} alt="Full View" className="full-image" />
-              <button className="close-button" onClick={handleCloseModal}>
-                Close
-              </button>
-            </div>
-          </div>
-        )}
         <div className="header-details">
-  <div className="name-date">
-    <h3 onClick={() => handleAuthorClick(post.author._id)}>{post.author.name}</h3>
-    <p className="post-date">{new Date(post.createdAt).toLocaleDateString()}</p>
-  </div>
-  <p>{post.author.college} - {post.author.role}</p>
-  <p className="post-id">Post ID: {post._id}</p>
-</div>
-
+          <div className="name-date">
+            <h3>{post.author.name}</h3>
+            <p className="post-date">{new Date(post.createdAt).toLocaleDateString()}</p>
+          </div>
+          <p>{post.author.college} - {post.author.role}</p>
+          <p className="post-id">Post ID: {post._id}</p>
+        </div>
       </div>
 
-     {/* Post Content */}
-<div className="post-content">
-  <h4><strong>Description:</strong> {post.content}</h4>
-  
-  {/* Render Attachments */}
-  <div className="attachments-container">
-    {renderAttachments(post.media)}
-  </div>
-  
-  {/* Render Project Details */}
-  <div className="project-details-container">
-    {renderProjectDetails(post.projectDetails, post._id)}
-  </div>
-</div>
-
+      {/* Post Content */}
+      <div className="post-content">
+        <h4><strong>Description:</strong> {post.content}</h4>
+        
+        {/* Render Attachments */}
+        <div className="attachments-container">
+          {renderAttachments(post.media)}
+        </div>
+        
+        {/* Render Project Details */}
+        <div className="project-details-container">
+          {renderProjectDetails(post.projectDetails, post._id)}
+        </div>
+      </div>
 
       {/* Engagement Stats */}
       <div className="engagement-stats">
-        <p>Likes: {post.likeCount} | Comments: {post.commentCount} | Shares: {post.shareCount}  | Saves: {post.saveCount}</p>
+        <p>Likes: {post.likeCount} | Comments: {post.commentCount} | Shares: {post.shareCount} | Saves: {post.saveCount}</p>
       </div>
-
 
       {/* Post Actions */}
       <div className="post-actions">

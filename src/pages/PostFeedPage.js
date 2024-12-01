@@ -5,10 +5,18 @@ import { Button, Card, CardContent, Typography } from "@mui/material";
 import { FaHeart, FaRegHeart, FaComment, FaShare, FaTrashAlt, FaBookmark, FaRegBookmark } from 'react-icons/fa'; // Import icons
 import UserDetailsCard from "../components/UserDetailsCard"; // Import the component
 import PostCard from "../components/PostCard"; // Import the PostCard component
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import './PostFeedPage.css';
+
 
 const PostFeedPage = () => {
   const location = useLocation();
-  const userDetails = location.state;
+  const [userDetails, setUserDetails] = useState(() => {
+    const storedDetails = JSON.parse(localStorage.getItem("userDetails"));
+    return location.state || storedDetails || null;
+  });
+  
   const navigate = useNavigate(); // Initialize navigate
   const { user, token } = userDetails || {};
 
@@ -23,6 +31,9 @@ const PostFeedPage = () => {
   const [requestError, setRequestError] = useState(null);
   const [requestMessage, setRequestMessage] = useState('');
 
+
+
+  
   // Fetch posts on component mount
   useEffect(() => {
     const fetchPosts = async () => {
@@ -188,7 +199,8 @@ const PostFeedPage = () => {
 
   return (
     <div className="post-feed-container">
-      <UserDetailsCard user={user} />
+<Header userDetails={userDetails} />
+<UserDetailsCard user={user} />
 
       <div className="create-post-button-container" style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
         <button onClick={() => navigate("/create-post", { state: userDetails })} className="create-button">Create Post</button>
@@ -224,6 +236,7 @@ const PostFeedPage = () => {
       ) : (
         <div>No posts available.</div>
       )}
+      <Footer />
     </div>
   );
 };

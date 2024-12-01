@@ -1,0 +1,67 @@
+/* Header Container */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 20px; /* Reduced padding for compact height */
+  background: rgba(90, 35, 31, 0); /* Semi-transparent background */
+  border-bottom: 3px solid var(--primary-accent-color);
+  color: var(--header-text-color);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
+  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+}
+
+/* Hidden State */
+.header.hidden {
+  transform: translateY(-100%);
+}
+
+/* Logo Section */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Reduced gap to bring logo and text closer */
+  margin-bottom: 5px; /* Reduced margin for less vertical space */
+}
+
+.logo img {
+  width: 40px; /* Slightly bigger logo size */
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--header-text-color);
+}
+
+.logo h1 {
+  font-size: 30px; /* Larger font size for the institution name */
+  font-weight: bold;
+  margin: 0;
+  font-family: "Georgia", serif;
+  text-transform: uppercase;
+  white-space: nowrap; /* Ensures the text stays in one line */
+}
+
+/* Navigation Menu */
+.nav-menu {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-menu button {
+  font-size: 8px; /* Smaller font size for buttons */
+  display: flex;
+  align-items: center;
+  gap: 2px; /* Reduced gap between icons and text */
+}
+
+
+
+
+
+
+
