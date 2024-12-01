@@ -16,7 +16,6 @@ import GroupChatPage from "./pages/GroupChatPage";
 import MessageManagementPage from "./pages/MessageManagementPage";
 import ChatPage from './pages/ChatPage';
 import RoleSelectionPage from './pages/RoleSelectionPage';
-import PostManagement from "./pages/PostManagement";
 
 import ProfileDetailPage from './pages/ProfileDetailPage';
 
@@ -78,7 +77,6 @@ const App = () => {
             <Route path="/chat/:userId" element={<ChatPage />} />
             <Route path="/messages" element={<MessageManagementPage />} />
             <Route path="/select-role" element={<RoleSelectionPage />} />
-            <Route path="/post-management" element={<PostManagement />} />
             <Route path="/create-post" element={<CreatePostPage />} />
             <Route path="/create-project" element={<CreateProjectPage />} /> {/* New route */}
 

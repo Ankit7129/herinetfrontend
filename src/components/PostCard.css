@@ -1,0 +1,279 @@
+/* General container styling */
+.post-feed-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    border-radius: 12px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Individual post card */
+  .post-card {
+    background-color: #a9ab97;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 550px;
+    margin-bottom: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  
+  .post-card:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+  }
+  
+  /* Header styling */
+  .post-header {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    gap: 15px;
+    width: 100%;
+    padding: 10px;
+    background-color: #6f3232;
+    border-bottom: 2px solid #e0e0e0;
+    transition: background-color 0.3s ease;
+  }
+  
+  .post-header:hover {
+    background-color: #2a5c77;
+  }
+  
+  .profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #dddddd;
+    transition: border-color 0.3s ease;
+  }
+  
+  .profile-pic:hover {
+    border-color: #007bff;
+  }
+  
+  /* Container for name and date on the same line */
+.name-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Adjust font size and spacing */
+.header-details h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.post-date {
+  font-size: 0.9em;
+  color: #999;
+  margin: 0;
+}
+
+/* Styling for the college and post ID */
+.header-details p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.post-id {
+  font-size: 0.8em;
+  color: #999;
+}
+
+  
+  /* Header details paragraph and date in same line */
+.header-details p,
+.post-date {
+  margin: 1px 0;
+  color: #666;
+  font-size: 0.9em;
+  display: inline-block; /* Aligns both elements in a row */
+  vertical-align: middle; /* Ensures proper vertical alignment */
+}
+
+.post-date {
+  font-size: 0.5em;
+  color: #999;
+}
+
+  
+  /* Emojis styling */
+  .header-details span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1em;
+  }
+  
+  /* Content styling */
+  .post-content {
+    text-align: center;
+    margin: 15px 0;
+    font-size: 14px;
+    color: #444;
+    line-height: 1.2;
+  }
+  
+  /* Project details */
+  .project-details {
+    background-color: #f0f8ff;
+    padding: 5px;
+    border-left: 3px solid #007bff;
+    border-radius: 20px;
+    margin-top: 5px;
+    width: 100%;
+  }
+  
+  .project-details h4 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #007bff;
+  }
+  
+  .project-details p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 0.95em;
+  }
+  
+  /* Attachments */
+  .attachments-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  
+  .attachment-item img,
+  .attachment-item video {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .attachment-item img:hover,
+  .attachment-item video:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Post actions */
+  .post-actions {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  .post-actions button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .post-actions button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  /* Comments section */
+  .comments-section {
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  .comments-section textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    resize: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .comments-section textarea:focus {
+    border-color: #007bff;
+  }
+  
+  .comment {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    padding: 8px;
+    border-radius: 12px;
+    margin-top: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Loading and error states */
+  .loading,
+  .error {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #ff6347;
+    font-weight: bold;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  /* Loading animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .post-feed-container {
+      padding: 15px;
+    }
+  
+    .post-card {
+      padding: 15px;
+    }
+  
+    .post-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .profile-pic {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .header-details h3 {
+      font-size: 1.1em;
+    }
+  
+    .post-actions {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+  

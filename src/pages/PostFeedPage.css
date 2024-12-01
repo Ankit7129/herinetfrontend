@@ -1,9 +1,9 @@
 /* General container styling */
 .post-feed-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 30px;
+  padding: 20px;
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
   border-radius: 12px;
@@ -11,18 +11,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Individual post card */
 .post-card {
   background-color: #fff;
   border-radius: 18px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  width: 90%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
   max-width: 550px;
-  margin-bottom: 25px;
-  padding: 25px;
+  margin-bottom: 15px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +30,7 @@
 }
 
 .post-card:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   transform: translateY(-5px);
 }
 
@@ -38,9 +38,9 @@
 .post-header {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   width: 100%;
-  padding: 15px;
+  padding: 12px;
   background-color: #f7f7f7;
   border-bottom: 2px solid #e0e0e0;
   transition: background-color 0.3s ease;
@@ -51,8 +51,8 @@
 }
 
 .profile-pic {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #ddd;
@@ -73,79 +73,79 @@
 .header-details h3 {
   margin: 0;
   color: #333;
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: bold;
 }
 
 .header-details p {
-  margin: 4px 0;
+  margin: 2px 0;
   color: #666;
-  font-size: 1em;
+  font-size: 0.9em;
 }
 
 .post-date {
-  font-size: 0.85em;
+  font-size: 0.8em;
   color: #999;
 }
 
-/* Emojis styling for better alignment */
+/* Emojis styling */
 .header-details span {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-size: 1em;
 }
 
 /* Content styling */
 .post-content {
   text-align: center;
-  margin: 20px 0;
-  font-size: 13px;
+  margin: 15px 0;
+  font-size: 14px;
   color: #444;
-  line-height: .8;
+  line-height: 1.2;
 }
 
 /* Project details */
 .project-details {
   background-color: #f0f8ff;
-  padding: 6px;
+  padding: 5px;
   border-left: 3px solid #007bff;
-  border-radius: 25px;
-  margin-top: 1px;
+  border-radius: 20px;
+  margin-top: 5px;
   width: 100%;
 }
 
 .project-details h4 {
   margin-top: 0;
-  font-size: 20px;
+  font-size: 18px;
   color: #007bff;
 }
 
 .project-details p {
-  margin: 6px 0;
+  margin: 5px 0;
   color: #555;
-  font-size: 1em;
+  font-size: 0.95em;
 }
 
 /* Attachments */
 .attachments-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  margin-top: 1px;
+  gap: 5px;
+  margin-top: 10px;
 }
 
 .attachment-item img,
 .attachment-item video {
   max-width: 100%;
   max-height: 100%;
-  border-radius: 10px;
+  border-radius: 8px;
   transition: transform 0.3s ease;
 }
 
 .attachment-item img:hover,
 .attachment-item video:hover {
-  transform: scale(1.00);
+  transform: scale(1.05);
 }
 
 /* Post actions */
@@ -153,14 +153,14 @@
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .post-actions button {
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 12px 25px;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
@@ -174,14 +174,14 @@
 /* Comments section */
 .comments-section {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .comments-section textarea {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 15px;
+  border-radius: 12px;
   resize: none;
   transition: border-color 0.3s ease;
 }
@@ -194,9 +194,9 @@
   display: flex;
   justify-content: space-between;
   background-color: #f9f9f9;
-  padding: 10px;
-  border-radius: 15px;
-  margin-top: 8px;
+  padding: 8px;
+  border-radius: 12px;
+  margin-top: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -204,7 +204,7 @@
 .loading,
 .error {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #ff6347;
   font-weight: bold;
   animation: fadeIn 0.5s ease;
@@ -227,7 +227,7 @@
   }
 
   .post-card {
-    padding: 14px;
+    padding: 15px;
   }
 
   .post-header {
@@ -247,67 +247,6 @@
   .post-actions {
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
   }
-}
-
-/* Modal styles */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.modal.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal-content {
-  position: relative;
-  background-color: white;
-  padding: 25px;
-  border-radius: 12px;
-  max-width: 600px;
-  width: 30%;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-  transform: scale(0.9);
-  transition: transform 0.3s ease;
-}
-
-.modal-content.show {
-  transform: scale(1);
-}
-
-.full-profile-image {
-  width: 100%;
-  max-width: 500px;
-  border-radius: 12px;
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: background-color 0.3s ease;
-}
-
-.close-button:hover {
-  background: #e60000;
 }
