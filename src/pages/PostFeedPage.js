@@ -7,7 +7,7 @@ import UserDetailsCard from "../components/UserDetailsCard"; // Import the compo
 import PostCard from "../components/PostCard"; // Import the PostCard component
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import './PostFeedPage.css';
+//mport './PostFeedPage.css';
 
 
 const PostFeedPage = () => {

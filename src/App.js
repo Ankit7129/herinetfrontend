@@ -24,6 +24,7 @@ import Footer from "./components/Footer";
 import PostFeedPage from "./pages/PostFeedPage";
 import CreatePostPage from "./pages/CreatePostPage";
 import CreateProjectPage from "./pages/CreateProjectPage"; // Import the new component
+import NotFoundPage from './components/NotFoundPage'; // Import the NotFoundPage
 
 
 import io from 'socket.io-client';
@@ -67,6 +68,8 @@ const App = () => {
         {/* Protected Routes */}
         {isAuthenticated ? (
           <>
+            <Route path="/*" component={NotFoundPage} /> {/* This will handle undefined routes */}
+
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/profiles" element={<ProfilesPage />} />
             <Route path="/profile/:userId" element={<ProfileDetailPage />} />

@@ -53,10 +53,6 @@ const Header = ({ userDetails }) => {
     fetchLogo();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
 
   const handleNavigation = (path) => {
     navigate(path, { state: userDetails });
@@ -72,7 +68,7 @@ const Header = ({ userDetails }) => {
         <button onClick={() => handleNavigation("/post-feed")}>
           <FontAwesomeIcon icon={faHome} /> Home
         </button>
-        <button onClick={() => handleNavigation("/announcements")}>
+        <button onClick={() => handleNavigation("/*")}>
           <FontAwesomeIcon icon={faBullhorn} /> Announcements
         </button>
         <button onClick={() => handleNavigation("/library")}>
